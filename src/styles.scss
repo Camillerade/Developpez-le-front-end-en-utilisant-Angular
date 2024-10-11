@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    margin: 0;
+    padding: 0;
+}
+.tooltip {
+    position: absolute;
+    background-color: rgba(0, 255, 136, 0.966);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 100;
+    pointer-events: none; /* Pour empêcher l'interaction avec le tooltip */
+  }
+  .pointer-events{
+
+    background-color: aqua;
+  }

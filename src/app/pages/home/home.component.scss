@@ -1,0 +1,48 @@
+ 
+.context {
+    background-color: #041e7259;
+    padding: 10px;
+    margin: 30px auto;
+    padding: 10px 30px;
+    width: 45%;
+    border-radius: 10px;
+    
+    h2{
+        text-align: center;
+    }
+  
+  }
+  
+  .error-message {
+    color: red;
+    text-align: center;
+    margin: 20px 0;
+  }
+  .graph-container {
+    display: flex;
+    justify-content: center; /* Centre le graphique horizontalement */
+    align-items: center; /* Centre le graphique verticalement */
+    margin: 20px 0; /* Marge en haut et en bas */
+    width: auto;
+  }
+    ngx-charts-line-chart {
+    width: auto; /* Prend toute la largeur disponible */
+    max-width:100%; /* Limite la largeur maximale */
+    height: fit-content; /* Hauteur fixe pour le graphique */
+  }
+  
+  h1 {
+    margin: auto;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background-color: rgba(35, 121, 121, 0.904);
+    padding: 10px; /* Espace entre le texte et les bords */
+    border-radius: 15px; /* Coins arrondis */
+    width: fit-content; /* Ajuste la largeur à la taille du contenu */
+    color : white ;
+  }
+  
+ 
+
+  
+  

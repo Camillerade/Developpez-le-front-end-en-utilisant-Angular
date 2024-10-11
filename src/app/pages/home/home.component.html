@@ -1,3 +1,30 @@
-<h2>Olympic games app</h2>
-<hr />
-<p>{{ (olympics$ | async)?.length }} data loaded</p>
+<div class="context">
+  <h2>Bienvenue sur l'application des Jeux Olympiques</h2>
+  <p>
+    Cette application permet de visualiser les performances des pays participants aux Jeux Olympiques, 
+    en analysant leurs résultats et en comparant leurs participations à travers différentes éditions des JO.
+  </p>
+</div>
+
+<h1>Médailles par pays</h1>
+
+  <div class="graph-container">
+  <div style="font-size: 64px;">
+    <ngx-charts-pie-chart 
+      [view]="view"
+      [scheme]="colorScheme"
+      [results]="data"
+      [legend]="false"
+      [labels]="true"
+      (select)="onSelect($event)"
+      (hover)="onHover($event)"
+      (leave)="onLeave()"
+    >
+    </ngx-charts-pie-chart>
+
+    <!-- Affichage du tooltip -->
+    <div *ngIf="tooltipData" class="tooltip" [ngStyle]="{'left.px': tooltipX, 'top.px': tooltipY}">
+      <div>{{ tooltipData.name }}: {{ tooltipData.value }}</div>
+    </div>
+  </div>
+</div>

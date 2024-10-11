@@ -1,0 +1,27 @@
+<div *ngIf="errorMessage">
+    <p class="error-message">{{ errorMessage }}</p>
+  </div>
+  
+  <div *ngIf="countryDetails$ | async as countryDetails; else loading">
+    <h2>Détails pour {{ countryName }}</h2>
+  
+    <div class="graph-container"> <!-- Conteneur pour centrer le graphique -->
+      <ngx-charts-line-chart
+        [view]="view" 
+        [scheme]="colorScheme"
+        [results]="lineChartData"
+        [legend]="false"
+        [xAxis]="true"
+        [yAxis]="true"
+        [autoScale]="true">
+      </ngx-charts-line-chart>
+    </div>
+  
+  </div>
+  
+  <ng-template #loading>
+    <p>Chargement des informations...</p>
+  </ng-template>
+  
+  <button (click)="goBack()" class="back-button">Retour</button> <!-- Bouton de retour -->
+  
