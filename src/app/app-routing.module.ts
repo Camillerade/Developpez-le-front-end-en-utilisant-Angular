@@ -6,7 +6,7 @@ import { DetailsComponent } from './pages/details/details.component'; // Importe
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'home',
     component: HomeComponent,
   },
   {

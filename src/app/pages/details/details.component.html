@@ -16,9 +16,14 @@
         [autoScale]="true">
       </ngx-charts-line-chart>
     </div>
+    
   
   </div>
   
+  <!-- Affichage du message d'erreur -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
   <ng-template #loading>
     <p>Chargement des informations...</p>
   </ng-template>
