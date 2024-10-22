@@ -14,19 +14,18 @@ Avant de commencer, assurez-vous d'avoir installé [Node.js](https://nodejs.org/
    git clone https://github.com/<Camillerade>/Developpez-le-front-end-en-utilisant-Angular.git
 Accédez au dossier du projet :
 
-bash
-Copier le code
+  ```bash
 cd OlympicGamesStarter
+
 Installez les dépendances :
 
 bash
-Copier le code
 npm install
 Démarrage du Serveur de Développement
 Pour lancer l'application en mode développement, exécutez :
 
 bash
-Copier le code
+
 ng serve
 Ensuite, ouvrez votre navigateur et accédez à l'URL suivante :
 
