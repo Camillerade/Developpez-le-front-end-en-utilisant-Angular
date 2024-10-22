@@ -11,7 +11,7 @@ Avant de commencer, assurez-vous d'avoir installé [Node.js](https://nodejs.org/
 1. Clonez le dépôt sur votre machine :
 
    ```bash
-   git clone https://github.com/<VotreNomUtilisateur>/OlympicGamesStarter.git
+   git clone https://github.com/<Camillerade>/Developpez-le-front-end-en-utilisant-Angular.git
 Accédez au dossier du projet :
 
 bash
