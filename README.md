@@ -1,29 +1,69 @@
 # OlympicGamesStarter
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.3.
+Ce projet a été généré avec Angular CLI version 18.0.3.
 
-Don't forget to install your node_modules before starting (`npm install`).
+## Prérequis
 
-## Development server
+Avant de commencer, assurez-vous d'avoir installé [Node.js](https://nodejs.org/) et [npm](https://www.npmjs.com/) sur votre machine.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Installation
 
-## Build
+1. Clonez le dépôt sur votre machine :
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+   ```bash
+   git clone https://github.com/<VotreNomUtilisateur>/OlympicGamesStarter.git
+Accédez au dossier du projet :
 
-## Where to start
+bash
+Copier le code
+cd OlympicGamesStarter
+Installez les dépendances :
 
-As you can see, an architecture has already been defined for the project. It is just a suggestion, you can choose to use your own. The predefined architecture includes (in addition to the default angular architecture) the following:
+bash
+Copier le code
+npm install
+Démarrage du Serveur de Développement
+Pour lancer l'application en mode développement, exécutez :
 
-- `components` folder: contains every reusable components
-- `pages` folder: contains components used for routing
-- `core` folder: contains the business logic (`services` and `models` folders)
+bash
+Copier le code
+ng serve
+Ensuite, ouvrez votre navigateur et accédez à l'URL suivante :
 
-I suggest you to start by understanding this starter code. Pay an extra attention to the `app-routing.module.ts` and the `olympic.service.ts`.
+http://localhost:4200
 
-Once mastered, you should continue by creating the typescript interfaces inside the `models` folder. As you can see I already created two files corresponding to the data included inside the `olympic.json`. With your interfaces, improve the code by replacing every `any` by the corresponding interface.
+L'application se rechargera automatiquement si vous apportez des modifications aux fichiers sources.
 
-You're now ready to implement the requested features.
+Construction de l'Application
+Pour construire le projet pour la production, exécutez :
 
-Good luck!
+bash
+Copier le code
+ng build
+Les fichiers de construction seront stockés dans le dossier dist/.
+
+Structure du Projet
+Le projet suit une architecture définie qui comprend :
+
+components/ : Contient tous les composants réutilisables.
+pages/ : Contient les composants utilisés pour le routage.
+core/ : Contient la logique métier (services et modèles).
+Démarrer avec le Code
+Il est recommandé de commencer par comprendre le code de démarrage. Portez une attention particulière à :
+
+app-routing.module.ts : Gère la configuration du routage de l'application.
+olympic.service.ts : Contient la logique pour interagir avec les données olympiques.
+Amélioration du Code
+Créez les interfaces TypeScript dans le dossier models/. Deux fichiers ont déjà été créés correspondant aux données du fichier olympic.json. Améliorez le code en remplaçant chaque any par l'interface correspondante.
+
+Fonctionnalités
+Le projet vous permet de :
+
+Afficher les détails des pays participants aux Jeux Olympiques.
+Visualiser les médailles gagnées par pays.
+Consulter le nombre total de participations et d'athlètes.
+Bonnes Pratiques
+Vérifiez toujours votre code avec des outils comme ESLint et Prettier.
+Écrivez des tests unitaires pour vos composants et services.
+Aide
+Si vous avez des questions ou des problèmes, n'hésitez pas à ouvrir une issue sur le dépôt ou à consulter la documentation d'Angular ici.

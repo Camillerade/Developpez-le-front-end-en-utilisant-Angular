@@ -21,10 +21,16 @@
       (leave)="onLeave()"
     >
     </ngx-charts-pie-chart>
+    
+    <div *ngIf="tooltipData" 
+    class="tooltip" 
+    [ngClass]="{'show': tooltipData}" 
+    [ngStyle]="{'left.px': tooltipX, 'top.px': tooltipY}">
+ <div>{{ tooltipData.name }}: {{ tooltipData.value }}</div>
+</div>
 
-    <!-- Affichage du tooltip -->
-    <div *ngIf="tooltipData" class="tooltip" [ngStyle]="{'left.px': tooltipX, 'top.px': tooltipY}">
-      <div>{{ tooltipData.name }}: {{ tooltipData.value }}</div>
-    </div>
+    
+    
+    
   </div>
 </div>

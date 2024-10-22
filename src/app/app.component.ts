@@ -8,7 +8,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';  // Import du module Ngx
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HeaderComponent, RouterModule, NgxChartsModule], // Ajout de NgxChartsModule ici
+  imports: [HeaderComponent, RouterModule, NgxChartsModule], 
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })

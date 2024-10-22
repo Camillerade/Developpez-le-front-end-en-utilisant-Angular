@@ -14,11 +14,31 @@ button{
     border-radius: 10px;
     padding: 10px;
 }
+.totals-container {
+  display: flex; /* Utilise Flexbox pour aligner les éléments */
+justify-content: center;
+  align-items: center; /* Aligne verticalement les éléments */
+}
 
+.total {
+  text-align: center;
+margin-right: 20px; /* Espacement entre les paragraphes */
+border: 3px groove  rgba(47, 165, 165, 0.904);
+border-radius: 10px;
+padding: 10px;
+}
+.label {
+  color: rgb(151, 150, 150); /* Couleur grise pour le label */
+}
+
+.value {
+  font-weight: bold;
+}
 .error-message {
     color: red;
     text-align: center;
     margin: 20px 0;
+    background-color: rgba(146, 19, 40, 0.404);
   }
   .graph-container {
     display: flex;

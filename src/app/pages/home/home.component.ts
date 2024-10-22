@@ -44,7 +44,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.tooltipData = { name: event.name, value: event.value };
     this.tooltipX = event.event.clientX;
     this.tooltipY = event.event.clientY;
+    
+    console.log('Tooltip Data:', this.tooltipData);
+    console.log('Position X:', this.tooltipX, 'Position Y:', this.tooltipY);
   }
+  
 
   onLeave() {
     this.tooltipData = null;

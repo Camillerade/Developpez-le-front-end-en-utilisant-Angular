@@ -15,9 +15,17 @@
   
   .error-message {
     color: red;
-    text-align: center;
-    margin: 20px 0;
+    padding: 50px;
+    background-color: rgba(146, 19, 40, 0.404);
+    border-radius: 50px;
+     justify-content: center; /* Centre le graphique horizontalement */
+    font-size: 45px;
+    width: fit-content;
+    margin: 50px auto;
+   
   }
+  
+  
   .graph-container {
     display: flex;
     justify-content: center; /* Centre le graphique horizontalement */

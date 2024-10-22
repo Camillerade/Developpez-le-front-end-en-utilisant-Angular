@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { Observable, of, Subject } from 'rxjs'; 
 import { catchError, takeUntil } from 'rxjs/operators';
+import { Location } from '@angular/common'; // Importer Location
 
 @Component({
   selector: 'app-details',
@@ -18,64 +19,101 @@ export class DetailsComponent implements OnInit, OnDestroy {
   infoMessage: string | null = null; // Message informatif pour l'utilisateur
   view: [number, number] = [window.innerWidth * 0.8, window.innerHeight * 0.6]; // Taille du graphique
 
-  private destroy$ = new Subject<void>();  // Subject pour gérer la destruction du composant
+  // Nouvelles propriétés pour stocker les données des médailles et des athlètes
+  totalMedals: number | null = null; // Nombre total de médailles
+  totalAthletes: number | null = null; // Nombre total d'athlètes
 
-  constructor(private route: ActivatedRoute, private olympicService: OlympicService, private router: Router) {}
+  private destroy$ = new Subject<void>();  // Subject pour gérer la destruction du composant
+  
+
+  constructor(private route: ActivatedRoute, private olympicService: OlympicService, private router: Router,private location: Location) {}
 
   ngOnInit(): void {
-    this.countryName = this.route.snapshot.paramMap.get('name');  // Récupère le nom du pays
-    this.infoMessage = `Chargement des détails pour le pays : ${this.countryName}...`;  // Message de chargement
+    this.countryName = this.route.snapshot.paramMap.get('name'); // Récupère le nom du pays
+    this.infoMessage = `Chargement des détails pour le pays : ${this.countryName}...`; // Message de chargement
 
     if (this.countryName) {
+      // Récupération des détails du pays
       this.countryDetails$ = this.olympicService.getCountryDetails(this.countryName).pipe(
         catchError(error => {
-          // En cas d'erreur, afficher un message d'erreur pour l'utilisateur
           this.errorMessage = 'Impossible de récupérer les détails de ce pays. Veuillez réessayer plus tard.';
-          this.infoMessage = null;  // Supprime le message de chargement
-          return of(null);  // Retourne une valeur nulle pour continuer l'exécution
+          this.infoMessage = null; // Supprime le message de chargement
+          return of(null); // Retourne une valeur nulle
         })
       );
 
-      // Abonnement à l'observable avec gestion automatique de l'annulation à la destruction du composant
+      // Abonnement pour obtenir les détails du pays
       this.countryDetails$
-        .pipe(takeUntil(this.destroy$))  // Abonnement annulé à la destruction du composant
+        .pipe(takeUntil(this.destroy$))
         .subscribe(details => {
           if (details) {
-            this.infoMessage = null;  // Supprime le message de chargement
-            this.lineChartData = this.formatChartData(details.participations);  // Formatte les données
+            this.infoMessage = null; // Supprime le message de chargement
+            this.lineChartData = this.formatChartData(details.participations); // Formate les données
+      
+            // Calcul des totaux de médailles et d'athlètes
+            this.totalMedals = this.calculateTotalMedals(details.participations); // Calcule le total des médailles
+            this.totalAthletes = this.calculateTotalAthletes(details.participations); // Calcule le total des athlètes
           } else {
-            this.infoMessage = 'Aucune donnée disponible pour ce pays.';  // Message si les détails sont vides
+            this.infoMessage = 'Aucune donnée disponible pour ce pays.';
           }
         });
-    } else {
-      this.errorMessage = 'Aucun pays sélectionné.';  // Message si aucun pays n'est trouvé dans l'URL
-    }
+
+      }
   }
 
   // Fonction pour formater les données à afficher sur le graphique des médailles par année
   formatChartData(participations: any[]): any[] {
-    // Vérifie si le tableau de participations est non vide
     if (!participations || participations.length === 0) {
-      this.infoMessage = 'Aucune participation trouvée pour ce pays.'; // Affiche un message si aucune donnée n'est disponible
+      this.infoMessage = 'Aucune participation trouvée pour ce pays.';
       return [];
     }
 
-    // Si des participations sont disponibles, formate les données
     return [{
-      name: this.countryName, // Le nom du pays pour lequel les données seront affichées sur le graphique
+      name: this.countryName,
       series: participations.map(participation => ({
-        name: participation.year.toString(),  // Conversion de l'année en chaîne de caractères pour l'affichage sans virgule
-        value: participation.medalsCount  // Nombre de médailles gagnées cette année-là
+        name: participation.year.toString(),
+        value: participation.medalsCount
       }))
     }];
   }
-  goBack(): void {
-    // Retour à la page d'accueil
-    this.router.navigate(['/home']);
+
+// Méthode pour calculer le nombre total de médailles
+calculateTotalMedals(participations: any[]): number {
+  if (!participations || participations.length === 0) {
+    return 0; // Retourne 0 si aucune participation
   }
-  // Méthode appelée lors de la destruction du composant pour nettoyer les abonnements
+
+  return participations.reduce((total, participation) => {
+    // Vérifie si medalsCount est un nombre valide
+    const medalsCount = typeof participation.medalsCount === 'number' ? participation.medalsCount : 0;
+    return total + medalsCount;
+  }, 0);
+}
+
+// Méthode pour calculer le nombre total d'athlètes
+calculateTotalAthletes(participations: any[]): number {
+  if (!participations || participations.length === 0) {
+    return 0; // Retourne 0 si aucune participation
+  }
+
+  return participations.reduce((total, participation) => {
+    // Vérifie si athleteCount est un nombre valide
+    const athleteCount = typeof participation.athleteCount === 'number' ? participation.athleteCount : 0;
+    return total + athleteCount;
+  }, 0);
+}
+
+  goToNotFound(): void {
+    this.router.navigate(['/some-non-existent-route']);
+  }
+
+   goBack(): void {
+    this.location.back(); // Retourne à la page précédente
+  }
+
+
   ngOnDestroy(): void {
-    this.destroy$.next();  // Déclenche l'annulation des abonnements
-    this.destroy$.complete();  // Ferme le Subject
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

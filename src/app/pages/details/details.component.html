@@ -2,10 +2,28 @@
     <p class="error-message">{{ errorMessage }}</p>
   </div>
   
+  <div *ngIf="errorMessage">
+    <p class="error-message">{{ errorMessage }}</p>
+  </div>
+  
   <div *ngIf="countryDetails$ | async as countryDetails; else loading">
     <h2>Détails pour {{ countryName }}</h2>
   
-    <div class="graph-container"> <!-- Conteneur pour centrer le graphique -->
+    <!-- Affichage du nombre total de médailles et d'athlètes -->
+<div *ngIf="totalMedals !== null && totalAthletes !== null" class="totals-container">
+  <p class="total">
+    <span class="label">Total de médailles</span><br>
+    <span class="value">{{ totalMedals }}</span>
+  </p>
+  <p class="total">
+    <span class="label">Total d'athlètes</span><br>
+    <span class="value">{{ totalAthletes }}</span>
+  </p>
+  
+</div>
+
+  
+    <div class="graph-container">
       <ngx-charts-line-chart
         [view]="view" 
         [scheme]="colorScheme"
@@ -16,17 +34,12 @@
         [autoScale]="true">
       </ngx-charts-line-chart>
     </div>
-    
-  
   </div>
   
-  <!-- Affichage du message d'erreur -->
-  <div *ngIf="errorMessage" class="error-message">
-    {{ errorMessage }}
-  </div>
   <ng-template #loading>
     <p>Chargement des informations...</p>
   </ng-template>
   
-  <button (click)="goBack()" class="back-button">Retour</button> <!-- Bouton de retour -->
+  <button (click)="goToNotFound()" class="btn btn-danger">Aller à une page non trouvée</button>
+  <button (click)="goBack()" class="back-button">Retour</button>
   
