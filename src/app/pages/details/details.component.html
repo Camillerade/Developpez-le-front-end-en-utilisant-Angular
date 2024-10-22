@@ -1,45 +1,42 @@
 <div *ngIf="errorMessage">
-    <p class="error-message">{{ errorMessage }}</p>
-  </div>
-  
-  <div *ngIf="errorMessage">
-    <p class="error-message">{{ errorMessage }}</p>
-  </div>
-  
-  <div *ngIf="countryDetails$ | async as countryDetails; else loading">
-    <h2>Détails pour {{ countryName }}</h2>
-  
-    <!-- Affichage du nombre total de médailles et d'athlètes -->
-<div *ngIf="totalMedals !== null && totalAthletes !== null" class="totals-container">
-  <p class="total">
-    <span class="label">Total de médailles</span><br>
-    <span class="value">{{ totalMedals }}</span>
-  </p>
-  <p class="total">
-    <span class="label">Total d'athlètes</span><br>
-    <span class="value">{{ totalAthletes }}</span>
-  </p>
-  
+  <p class="error-message">{{ errorMessage }}</p>
 </div>
 
-  
-    <div class="graph-container">
-      <ngx-charts-line-chart
-        [view]="view" 
-        [scheme]="colorScheme"
-        [results]="lineChartData"
-        [legend]="false"
-        [xAxis]="true"
-        [yAxis]="true"
-        [autoScale]="true">
-      </ngx-charts-line-chart>
-    </div>
+<ng-container *ngIf="countryDetails$ | async as countryDetails; else loading">
+  <h2>Détails pour {{ countryName }}</h2>
+
+  <!-- Affichage du nombre total de médailles, d'athlètes et de participations -->
+  <div *ngIf="totalMedals !== null && totalAthletes !== null && totalParticipations !== null" class="totals-container">
+    <p class="total">
+      <span class="label">Total de médailles</span><br>
+      <span class="value">{{ totalMedals }}</span>
+    </p>
+    <p class="total">
+      <span class="label">Total d'athlètes</span><br>
+      <span class="value">{{ totalAthletes }}</span>
+    </p>
+    <p class="total">
+      <span class="label">Total de participations</span><br>
+      <span class="value">{{ totalParticipations }}</span>
+    </p>
   </div>
-  
-  <ng-template #loading>
-    <p>Chargement des informations...</p>
-  </ng-template>
-  
-  <button (click)="goToNotFound()" class="btn btn-danger">Aller à une page non trouvée</button>
-  <button (click)="goBack()" class="back-button">Retour</button>
-  
+
+  <div class="graph-container">
+    <ngx-charts-line-chart
+      [view]="view" 
+      [scheme]="colorScheme"
+      [results]="lineChartData"
+      [legend]="false"
+      [xAxis]="true"
+      [yAxis]="true"
+      [autoScale]="true">
+    </ngx-charts-line-chart>
+  </div>
+</ng-container>
+
+<ng-template #loading>
+  <p>Chargement des informations...</p>
+</ng-template>
+
+<button (click)="goToNotFound()" class="btn btn-danger">Aller à une page non trouvée</button>
+<button (click)="goBack()" class="back-button">Retour</button>
